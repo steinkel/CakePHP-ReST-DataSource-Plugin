@@ -1,6 +1,6 @@
 <?php
 
-App::import('Model', 'AppModel');
+App::uses('AppModel', 'Model');
 
 class RestTestModel extends AppModel {
 
@@ -15,7 +15,7 @@ class RestTestModel extends AppModel {
  */
 class RestSourceTestCase extends CakeTestCase {
 
-    public function startCase() {
+    public function setUp() {
         ConnectionManager::create('rest_test', array(
             'datasource' => 'Rest.RestSource',
             'database' => false,
