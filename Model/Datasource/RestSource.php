@@ -1,5 +1,7 @@
 <?php
 
+App::uses('DataSource', 'Model/DataSource');
+
 /**
  * DataSource for interacting with REST APIs
  *
@@ -46,7 +48,7 @@ class RestSource extends DataSource {
 	 * @param array $fields Unused
 	 * @param array $values Unused
 	 */
-	public function create(&$model, $fields = null, $values = null) {
+	public function create($model, $fields = null, $values = null) {
 		$model->request = array_merge(array('method' => 'POST'), $model->request);
 		return $this->request($model);
 	}
@@ -57,7 +59,7 @@ class RestSource extends DataSource {
 	 * @param AppModel $model
 	 * @param array $queryData Unused
 	 */
-	public function read(&$model, $queryData = array()) {
+	public function read($model, $queryData = array()) {
 		$model->request = array_merge(array('method' => 'GET'), $model->request);
 		return $this->request($model);
 	}
@@ -69,7 +71,7 @@ class RestSource extends DataSource {
 	 * @param array $fields Unused
 	 * @param array $values Unused
 	 */
-	public function update(&$model, $fields = null, $values = null) {
+	public function update($model, $fields = null, $values = null) {
 		$model->request = array_merge(array('method' => 'PUT'), $model->request);
 		return $this->request($model);
 	}
@@ -80,7 +82,7 @@ class RestSource extends DataSource {
 	 * @param AppModel $model
 	 * @param mixed $id Unused
 	 */
-	public function delete(&$model, $id = null) {
+	public function delete($model, $id = null) {
 		$model->request = array_merge(array('method' => 'DELETE'), $model->request);
 		return $this->request($model);
 	}
@@ -95,8 +97,7 @@ class RestSource extends DataSource {
 	 * URI.
 	 * @return mixed The response or false
 	 */
-	public function request(&$model) {
-
+	public function request($model) {
 		if (is_object($model)) {
 			$request = $model->request;
 		} elseif (is_array($model)) {

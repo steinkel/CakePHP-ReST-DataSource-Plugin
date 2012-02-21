@@ -17,23 +17,31 @@ class RestTestModel extends AppModel {
  */
 class RestSourceTestCase extends CakeTestCase {
 
-	public function setUp() {
+	public static function setUpBeforeClass() {
 		ConnectionManager::create('rest_test', array(
 			'datasource' => 'Rest.RestSource',
 			'database' => false,
 		));
 	}
 
-	public function startTest($method) {
+	public static function tearDownAfterClass() {
+		ConnectionManager::drop('rest_test');
+	}
+
+	public function setUp() {
+		parent::setUp();
 		$this->Model = ClassRegistry::init('RestTestModel');
 	}
 
-	public function endTest($method) {
+	public function tearDown() {
 		unset($this->Model);
-		ClassRegistry::flush();
+		parent::tearDown();
 	}
 
-	public function testRead_json() {
+	/**
+	 * read json data
+	 */
+	public function testReadJsonData() {
 		$this->Model->request = array(
 			'uri' => array(
 				'host' => 'search.twitter.com',
@@ -47,7 +55,10 @@ class RestSourceTestCase extends CakeTestCase {
 		$this->assertTrue(isset($results['results']));
 	}
 
-	public function testRead_xml() {
+	/**
+	 * read xml data
+	 */
+	public function testReadXmlData() {
 		$this->Model->request = array(
 			'uri' => array(
 				'host' => 'bakery.cakephp.org',
