@@ -151,6 +151,7 @@ class RestSource extends DataSource {
 		} elseif (is_string($model)) {
 			$request = array('uri' => $model);
 		}
+		$log = isset($request['log']) ? $request['log'] : Configure::read('debug') > 1;
 
 		// Remove unwanted elements from request array
 		$request = array_intersect_key($request, $this->Http->request);
@@ -160,9 +161,11 @@ class RestSource extends DataSource {
 		$response = $this->Http->request($request);
 		/* @var $response HttpResponse */
 
-		// Record log
-		$this->took = round(microtime(true) - $timerStart, 3) * 1000;
-		$this->logRequest($request, $response);
+		if ($log) {
+			// Record log
+			$this->took = round(microtime(true) - $timerStart, 3) * 1000;
+			$this->logRequest($request, $response);
+		}
 
 		// Get content type header
 		$contentType = $this->Http->response['header']['Content-Type'];

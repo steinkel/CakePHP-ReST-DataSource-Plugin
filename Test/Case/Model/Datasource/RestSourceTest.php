@@ -11,10 +11,12 @@ class RestTestModel extends AppModel {
 	public $request = array();
 
 }
+
 ConnectionManager::create('rest_test', array(
-			'datasource' => 'Rest.RestSource',
-			'database' => false,
-		));
+	'datasource' => 'Rest.RestSource',
+	'database' => false,
+));
+
 /**
  * @property RestTestModel $Model
  */
@@ -110,6 +112,27 @@ class RestSourceTestCase extends CakeTestCase {
 		$this->assertRegExp('/' . preg_quote('http://bakery.cakephp.org/articles.rss', '/') . '/s', $contents);
 
 		Configure::write('debug', $oldDebug);
+	}
+
+/**
+ * testLog method
+ *
+ * @return void
+ */
+	public function testLogOptionIsFalse() {
+		$this->Model->getDataSource()->getLog(false, true);
+		$this->Model->request = array(
+			'uri' => array(
+				'host' => 'search.twitter.com',
+				'path' => 'search.json',
+				'query' => array('q' => 'twitter'),
+			),
+			'log' => false,
+		);
+		$this->Model->find('all');
+
+		$log = $this->Model->getDataSource()->getLog(false, false);
+		$this->assertEmpty($log['log']);
 	}
 
 }
