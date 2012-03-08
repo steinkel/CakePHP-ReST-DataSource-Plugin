@@ -12,26 +12,26 @@ App::uses('DataSource', 'Model/DataSource');
  */
 class RestSource extends DataSource {
 
-	/**
-	 * The description of this data source
-	 *
-	 * @var string
-	 */
+/**
+ * The description of this data source
+ *
+ * @var string
+ */
 	public $description = 'Rest DataSource';
 
-	/**
-	 * Instance of CakePHP core HttpSocket class
-	 *
-	 * @var HttpSocket
-	 */
+/**
+ * Instance of CakePHP core HttpSocket class
+ *
+ * @var HttpSocket
+ */
 	public $Http = null;
 
-	/**
-	 * Loads HttpSocket class
-	 *
-	 * @param array $config
-	 * @param HttpSocket $Http
-	 */
+/**
+ * Loads HttpSocket class
+ *
+ * @param array $config
+ * @param HttpSocket $Http
+ */
 	public function __construct($config, $Http = null) {
 		parent::__construct($config);
 		if (!$Http) {
@@ -41,62 +41,62 @@ class RestSource extends DataSource {
 		$this->Http = $Http;
 	}
 
-	/**
-	 * Sets method = POST in request if not already set
-	 *
-	 * @param AppModel $model
-	 * @param array $fields Unused
-	 * @param array $values Unused
-	 */
+/**
+ * Sets method = POST in request if not already set
+ *
+ * @param AppModel $model
+ * @param array $fields Unused
+ * @param array $values Unused
+ */
 	public function create($model, $fields = null, $values = null) {
 		$model->request = array_merge(array('method' => 'POST'), $model->request);
 		return $this->request($model);
 	}
 
-	/**
-	 * Sets method = GET in request if not already set
-	 *
-	 * @param AppModel $model
-	 * @param array $queryData Unused
-	 */
+/**
+ * Sets method = GET in request if not already set
+ *
+ * @param AppModel $model
+ * @param array $queryData Unused
+ */
 	public function read($model, $queryData = array()) {
 		$model->request = array_merge(array('method' => 'GET'), $model->request);
 		return $this->request($model);
 	}
 
-	/**
-	 * Sets method = PUT in request if not already set
-	 *
-	 * @param AppModel $model
-	 * @param array $fields Unused
-	 * @param array $values Unused
-	 */
+/**
+ * Sets method = PUT in request if not already set
+ *
+ * @param AppModel $model
+ * @param array $fields Unused
+ * @param array $values Unused
+ */
 	public function update($model, $fields = null, $values = null) {
 		$model->request = array_merge(array('method' => 'PUT'), $model->request);
 		return $this->request($model);
 	}
 
-	/**
-	 * Sets method = DELETE in request if not already set
-	 *
-	 * @param AppModel $model
-	 * @param mixed $id Unused
-	 */
+/**
+ * Sets method = DELETE in request if not already set
+ *
+ * @param AppModel $model
+ * @param mixed $id Unused
+ */
 	public function delete($model, $id = null) {
 		$model->request = array_merge(array('method' => 'DELETE'), $model->request);
 		return $this->request($model);
 	}
 
-	/**
-	 * Issues request and returns response as an array decoded according to the
-	 * response's content type if the response code is 200, else triggers the
-	 * $model->onError() method (if it exists) and finally returns false.
-	 *
-	 * @param mixed $model Either a CakePHP model with a request property, or an
-	 * array in the format expected by HttpSocket::request or a string which is a
-	 * URI.
-	 * @return mixed The response or false
-	 */
+/**
+ * Issues request and returns response as an array decoded according to the
+ * response's content type if the response code is 200, else triggers the
+ * $model->onError() method (if it exists) and finally returns false.
+ *
+ * @param mixed $model Either a CakePHP model with a request property, or an
+ * array in the format expected by HttpSocket::request or a string which is a
+ * URI.
+ * @return mixed The response or false
+ */
 	public function request($model) {
 		if (is_object($model)) {
 			$request = $model->request;

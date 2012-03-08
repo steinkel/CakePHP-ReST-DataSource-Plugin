@@ -38,9 +38,9 @@ class RestSourceTestCase extends CakeTestCase {
 		parent::tearDown();
 	}
 
-	/**
-	 * read json data
-	 */
+/**
+ * read json data
+ */
 	public function testReadJsonData() {
 		$this->Model->request = array(
 			'uri' => array(
@@ -55,9 +55,9 @@ class RestSourceTestCase extends CakeTestCase {
 		$this->assertTrue(isset($results['results']));
 	}
 
-	/**
-	 * read xml data
-	 */
+/**
+ * read xml data
+ */
 	public function testReadXmlData() {
 		$this->Model->request = array(
 			'uri' => array(
