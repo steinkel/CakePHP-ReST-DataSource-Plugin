@@ -1,6 +1,7 @@
 <?php
 
-App::uses('DataSource', 'Model/DataSource');
+App::uses('DataSource', 'Model/Datasource');
+App::uses('Xml', 'Utility');
 
 /**
  * DataSource for interacting with REST APIs
@@ -133,7 +134,6 @@ class RestSource extends DataSource {
 				// Xml class. This can use a lot of memory so we have to manually
 				// garbage collect the Xml object when we've finished with it, i.e. got
 				// it to transform the xml string response into a php array.
-				App::uses('Xml', 'Utility');
 				$Xml = Xml::build($response->body);
 				$response = Xml::toArray($Xml); // Send false to get separate elements
 				unset($Xml);

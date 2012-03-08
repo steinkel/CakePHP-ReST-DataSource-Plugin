@@ -52,7 +52,7 @@ class RestSourceTestCase extends CakeTestCase {
 
 		$results = $this->Model->find('all');
 
-		$this->assertTrue(isset($results['results']));
+		$this->assertArrayHasKey('results', $results);
 	}
 
 /**
@@ -68,7 +68,7 @@ class RestSourceTestCase extends CakeTestCase {
 
 		$results = $this->Model->find('all');
 
-		$this->assertTrue(isset($results['rss']));
+		$this->assertArrayHasKey('rss', $results);
 	}
 
 }
