@@ -235,14 +235,14 @@ class RestSource extends DataSource {
 			$responseBody = substr_replace($responseBody, $separator, $maxlength / 2, strlen($responseBody) - $maxlength);
 		}
 		$this->_requestLog[] = array(
-			'request_method' => $request['method'],
+			'request_method' => $this->Http->request['method'],
 			'request_uri' => $requestUri,
 			'request_body' => h($requestBody),
 			'response_code' => $this->Http->response['status']['code'],
 			'response_type' => $this->Http->response['header']['Content-Type'],
 			'response_size' => strlen($this->Http->response['body']),
 			'response_body' => h($responseBody),
-			'query' => $request['method'] . ' ' . $requestUri,
+			'query' => $this->Http->request['method'] . ' ' . $requestUri,
 			'params' => '',
 			'error' => '',
 			'affected' => '',
