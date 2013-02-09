@@ -1,0 +1,25 @@
+{
+    "name": "nojimage/rest",
+    "description": "CakePHP Rest Plugin",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp", "datasource"],
+    "homepage": "https://github.com/nojimage/CakePHP-ReST-DataSource-Plugin",
+    "version": "2.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Neil Crookes",
+            "homepage": "http://www.neilcrookes.com",
+            "role": "Original Developer"
+        },
+        {
+            "name": "Takashi Nojima",
+            "homepage": "http://php-tips.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.8",
+        "composer/installers": "*"
+    }
+}
