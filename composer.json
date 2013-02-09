@@ -1,10 +1,9 @@
 {
     "name": "nojimage/cakephp-rest",
-    "description": "CakePHP Rest Plugin",
+    "description": "A CakePHP Plugin containing a DataSource for interacting with ReSTful web services.",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "datasource"],
     "homepage": "https://github.com/nojimage/CakePHP-ReST-DataSource-Plugin",
-    "version": "2.0.0",
     "license": "MIT",
     "authors": [
         {
