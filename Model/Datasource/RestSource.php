@@ -168,7 +168,7 @@ class RestSource extends DataSource {
 		}
 
 		// Get content type header
-		$contentType = $this->Http->response['header']['Content-Type'];
+		$contentType = $this->Http->response->getHeader('Content-Type');
 
 		// Extract content type from content type header
 		if (preg_match('/^([a-z0-9\/\+]+);\s*charset=([a-z0-9\-]+)/i', $contentType, $matches)) {
@@ -239,7 +239,7 @@ class RestSource extends DataSource {
 			'request_uri' => $requestUri,
 			'request_body' => h($requestBody),
 			'response_code' => $this->Http->response['status']['code'],
-			'response_type' => $this->Http->response['header']['Content-Type'],
+			'response_type' => $this->Http->response->getHeader('Content-Type'),
 			'response_size' => strlen($this->Http->response['body']),
 			'response_body' => h($responseBody),
 			'query' => $this->Http->request['method'] . ' ' . $requestUri,
