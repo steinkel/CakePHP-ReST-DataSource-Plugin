@@ -42,15 +42,15 @@ class RestSourceTestCase extends CakeTestCase {
 	public function testReadJsonData() {
 		$this->Model->request = array(
 			'uri' => array(
-				'host' => 'search.twitter.com',
-				'path' => 'search.json',
-				'query' => array('q' => 'twitter'),
+				'host' => 'ip.jsontest.com',
+				'path' => 'example/text',
+				'query' => array('service' => 'echo'),
 			),
 		);
 
 		$results = $this->Model->find('all');
 
-		$this->assertArrayHasKey('results', $results);
+		$this->assertArrayHasKey('example', $results);
 	}
 
 /**
@@ -76,6 +76,9 @@ class RestSourceTestCase extends CakeTestCase {
  * @return void
  */
 	public function testLog() {
+		// clear log
+		$this->Model->getDataSource()->getLog();
+
 		$this->Model->request = array(
 			'uri' => array(
 				'host' => 'search.twitter.com',
