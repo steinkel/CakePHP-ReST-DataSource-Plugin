@@ -90,11 +90,11 @@ class RestSource extends DataSource {
 /**
  * Sets method = POST in request if not already set
  *
- * @param AppModel $model
+ * @param Model $model
  * @param array $fields Unused
  * @param array $values Unused
  */
-	public function create($model, $fields = null, $values = null) {
+	public function create(Model $model, $fields = null, $values = null) {
 		$model->request = array_merge(array('method' => 'POST'), $model->request);
 		return $this->request($model);
 	}
@@ -102,10 +102,11 @@ class RestSource extends DataSource {
 /**
  * Sets method = GET in request if not already set
  *
- * @param AppModel $model
+ * @param Model $model
  * @param array $queryData Unused
+ * @param integer $recursive Unused
  */
-	public function read($model, $queryData = array()) {
+	public function read(Model $model, $queryData = array(), $recursive = null) {
 		$model->request = array_merge(array('method' => 'GET'), $model->request);
 		return $this->request($model);
 	}
@@ -113,11 +114,12 @@ class RestSource extends DataSource {
 /**
  * Sets method = PUT in request if not already set
  *
- * @param AppModel $model
+ * @param Model $model
  * @param array $fields Unused
  * @param array $values Unused
+ * @param mixed $conditions Unused
  */
-	public function update($model, $fields = null, $values = null) {
+	public function update(Model $model, $fields = null, $values = null, $conditions = null) {
 		$model->request = array_merge(array('method' => 'PUT'), $model->request);
 		return $this->request($model);
 	}
@@ -125,10 +127,10 @@ class RestSource extends DataSource {
 /**
  * Sets method = DELETE in request if not already set
  *
- * @param AppModel $model
+ * @param Model $model
  * @param mixed $id Unused
  */
-	public function delete($model, $id = null) {
+	public function delete(Model $model, $id = null) {
 		$model->request = array_merge(array('method' => 'DELETE'), $model->request);
 		return $this->request($model);
 	}

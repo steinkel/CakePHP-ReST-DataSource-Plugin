@@ -6,13 +6,15 @@ class RestTestModel extends AppModel {
 
 	public $name = 'RestTestModel';
 
-	public $useDbConfig = 'rest_test';
+	public $useDbConfig = 'test_rest';
+
+	public $useTable = false;
 
 	public $request = array();
 
 }
 
-ConnectionManager::create('rest_test', array(
+ConnectionManager::create('test_rest', array(
 	'datasource' => 'Rest.RestSource',
 	'database' => false,
 ));
@@ -25,7 +27,7 @@ class RestSourceTestCase extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->Model = ClassRegistry::init('RestTestModel');
-		$this->DataSource = ConnectionManager::getDataSource('rest_test');
+		$this->DataSource = ConnectionManager::getDataSource('test_rest');
 	}
 
 	public function tearDown() {
@@ -40,15 +42,15 @@ class RestSourceTestCase extends CakeTestCase {
 	public function testReadJsonData() {
 		$this->Model->request = array(
 			'uri' => array(
-				'host' => 'search.twitter.com',
-				'path' => 'search.json',
-				'query' => array('q' => 'twitter'),
+				'host' => 'ip.jsontest.com',
+				'path' => 'example/text',
+				'query' => array('service' => 'echo'),
 			),
 		);
 
 		$results = $this->Model->find('all');
 
-		$this->assertArrayHasKey('results', $results);
+		$this->assertArrayHasKey('example', $results);
 	}
 
 /**
@@ -74,6 +76,9 @@ class RestSourceTestCase extends CakeTestCase {
  * @return void
  */
 	public function testLog() {
+		// clear log
+		$this->Model->getDataSource()->getLog();
+
 		$this->Model->request = array(
 			'uri' => array(
 				'host' => 'search.twitter.com',
