@@ -6,13 +6,15 @@ class RestTestModel extends AppModel {
 
 	public $name = 'RestTestModel';
 
-	public $useDbConfig = 'rest_test';
+	public $useDbConfig = 'test_rest';
+
+	public $useTable = false;
 
 	public $request = array();
 
 }
 
-ConnectionManager::create('rest_test', array(
+ConnectionManager::create('test_rest', array(
 	'datasource' => 'Rest.RestSource',
 	'database' => false,
 ));
@@ -25,7 +27,7 @@ class RestSourceTestCase extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->Model = ClassRegistry::init('RestTestModel');
-		$this->DataSource = ConnectionManager::getDataSource('rest_test');
+		$this->DataSource = ConnectionManager::getDataSource('test_rest');
 	}
 
 	public function tearDown() {
