@@ -3,6 +3,8 @@ CakePHP ReST DataSource Plugin
 
 A CakePHP Plugin containing a DataSource for interarcting with ReSTful web services.
 
+[![Build Status](https://travis-ci.org/nojimage/CakePHP-ReST-DataSource-Plugin.png?branch=master)](https://travis-ci.org/nojimage/CakePHP-ReST-DataSource-Plugin)
+
 How it works
 ------------
 
