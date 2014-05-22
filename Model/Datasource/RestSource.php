@@ -146,13 +146,7 @@ class RestSource extends DataSource {
  * @return mixed The response or false
  */
 	public function request($model) {
-		if (is_object($model)) {
-			$request = $model->request;
-		} elseif (is_array($model)) {
-			$request = $model;
-		} elseif (is_string($model)) {
-			$request = array('uri' => $model);
-		}
+		$request = $this->_extractRequest($model);
 		$log = isset($request['log']) ? $request['log'] : Configure::read('debug') > 1;
 
 		// Remove unwanted elements from request array
@@ -212,6 +206,23 @@ class RestSource extends DataSource {
 		}
 
 		return $response;
+	}
+
+/**
+ * Extract the request based on the $model
+ * @param mixed $model
+ * @return array
+ */
+	protected function _extractRequest($model) {
+		if (is_object($model)) {
+			$request = $model->request;
+		} elseif (is_array($model)) {
+			$request = $model;
+		} elseif (is_string($model)) {
+			$request = array('uri' => $model);
+		}
+
+		return $request;
 	}
 
 /**
